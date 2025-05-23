@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>과일 맞추기 게임</title>
+</head>
+<body>
+  <h1>🍎 과일 맞추기 게임</h1>
+  <p>다음 중 하나의 과일 이름(일본어)을 입력해보세요!</p>
+  <p><strong>과일 목록:</strong><br>
+    りんご, ばなな, みかん, もも, ぶどう, すいか, なし, いちご, さくらんぼ, 
+    くり, めろん, きうい, かき, あんず, れもん
+  </p>
+
+  <input type="text" id="guess" placeholder="일본어로 입력 (예: りんご)">
+  <button onclick="checkAnswer()">제출</button>
+
+  <p id="result"></p>
+
+  <script>
+    const fruits = [
+      "りんご", "ばなな", "みかん", "もも", "ぶどう",
+      "すいか", "なし", "いちご", "さくらんぼ", "くり",
+      "めろん", "きうい", "かき", "あんず", "れもん"
+    ];
+    const answer = fruits[Math.floor(Math.random() * fruits.length)];
+
+    function checkAnswer() {
+      const guess = document.getElementById("guess").value.trim();
+      const result = document.getElementById("result");
+
+      if (guess === answer) {
+        result.textContent = "정답입니다! 🎉";
+      } else {
+        result.textContent = `땡❌ 틀렸어요! 정답은 「${answer}」였습니다.`;
+      }
+    }
+  </script>
+</body>
+</html>
