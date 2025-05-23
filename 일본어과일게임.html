@@ -2,19 +2,29 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>과일 맞추기 게임</title>
+  <title>과일 맞추기 - 카드 선택</title>
+  <style>
+    .card {
+      display: inline-block;
+      padding: 15px 25px;
+      margin: 10px;
+      font-size: 24px;
+      background-color: #f0f0f0;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .card:hover {
+      background-color: #e0e0ff;
+    }
+  </style>
 </head>
 <body>
-  <h1>🍎 과일 맞추기 게임</h1>
-  <p>다음 중 하나의 과일 이름(일본어)을 입력해보세요!</p>
-  <p><strong>과일 목록:</strong><br>
-    りんご, ばなな, みかん, もも, ぶどう, すいか, なし, いちご, さくらんぼ, 
-    くり, めろん, きうい, かき, あんず, れもん
-  </p>
+  <h1> 🍒 일본어 과일 맞추기 게임</h1>
+  <p>일본어 과일 이름이 적힌 카드를 클릭해서 정답을 맞춰보세요!</p>
 
-  <input type="text" id="guess" placeholder="일본어로 입력 (예: りんご)">
-  <button onclick="checkAnswer()">제출</button>
-
+  <div id="cards"></div>
   <p id="result"></p>
 
   <script>
@@ -23,16 +33,39 @@
       "すいか", "なし", "いちご", "さくらんぼ", "くり",
       "めろん", "きうい", "かき", "あんず", "れもん"
     ];
+
+    // 정답 뽑기
     const answer = fruits[Math.floor(Math.random() * fruits.length)];
 
-    function checkAnswer() {
-      const guess = document.getElementById("guess").value.trim();
-      const result = document.getElementById("result");
+    // 보기 만들기 (정답 포함 랜덤 5개)
+    let options = [answer];
+    while (options.length < 5) {
+      const random = fruits[Math.floor(Math.random() * fruits.length)];
+      if (!options.includes(random)) {
+        options.push(random);
+      }
+    }
 
-      if (guess === answer) {
-        result.textContent = "정답입니다! 🎉";
+    // 보기 섞기
+    options = options.sort(() => Math.random() - 0.5);
+
+    // 카드 표시
+    const cardsDiv = document.getElementById("cards");
+    options.forEach(fruit => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.textContent = fruit;
+      card.onclick = () => checkAnswer(fruit);
+      cardsDiv.appendChild(card);
+    });
+
+    // 정답 확인
+    function checkAnswer(choice) {
+      const result = document.getElementById("result");
+      if (choice === answer) {
+        result.textContent = `🎉 정답입니다! 「${choice}」`;
       } else {
-        result.textContent = `땡❌ 틀렸어요! 정답은 「${answer}」였습니다.`;
+        result.textContent = `❌ 땡 틀렸어요. 정답은 「${answer}」였어요.`;
       }
     }
   </script>
