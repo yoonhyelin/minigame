@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>랜덤 애완동물 생성기</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: 'Arial';
+      padding: 50px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    .back-button {
+      margin-top: 40px;
+      padding: 10px 20px;
+      font-size: 14px;
+      background-color: #eee;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🐾 랜덤 애완동물 생성기</h1>
+  <p>성격과 동물을 조합해서 당신만의 귀여운 친구를 만들어보세요!</p>
+
+  <button onclick="generatePet()">🐶 애완동물 만들기</button>
+
+  <p id="result" style="font-size: 24px; margin-top: 30px;"></p>
+
+  <button class="back-button" onclick="location.href='index.html'">← 게임 선택 화면으로</button>
+
+  <script>
+    const animals = [
+      "강아지 🐶", "고양이 🐱", "토끼 🐰", "햄스터 🐹", "앵무새 🐦",
+      "기니피그 🐭", "거북이 🐢", "이구아나 🦎", "물고기 🐠", "고슴도치 🦔",
+      "돼지 🐷", "너구리 🦝", "사슴 🦌", "말 🐴", "펭귄 🐧"
+    ];
+
+    const traits = [
+      "게으른", "활발한", "소심한", "귀여운", "호기심 많은",
+      "용감한", "겁쟁이", "다정한", "똑똑한", "잠꾸러기",
+      "먹보", "도도한", "장난꾸러기", "시끄러운", "차분한"
+    ];
+
+    function generatePet() {
+      const animal = animals[Math.floor(Math.random() * animals.length)];
+      const trait = traits[Math.floor(Math.random() * traits.length)];
+
+      const resultText = `당신의 애완동물은: ${trait} ${animal} 입니다!`;
+      document.getElementById("result").textContent = resultText;
+    }
+  </script>
+</body>
+</html>
